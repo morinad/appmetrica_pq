@@ -9,6 +9,8 @@
 4) Перезапустите Power BI. Нажмите на кнопку "Получить данные", в поиске введите "App" и выберите коннектор AppMetrica Connector.
 
 ### Полезные ссылки:
+Инструкция по использованию:https://youtu.be/Gnw6yTpQlbE
+
 Справка AppMetrica: https://appmetrica.yandex.ru/docs/mobile-api/api_v1/metrics/mainmetr.html
 
 
