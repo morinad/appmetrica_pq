@@ -73,7 +73,7 @@ AppMetrica.Data = (id as text,  start as text,  end as text,    optional custom 
 url = if custom = null then "https://api.appmetrica.yandex.ru/stat/v1/data.csv" else Text.BeforeDelimiter(custom, "?")&".csv",
 dim = if dimensions=null then "" else dimensions,
 met = if metrics=null then "ym:u:activeUsers" else metrics,
-get =   if custom = null then  [#"metrics"=met, #"dimensions"=dim, #"id"=id, #"date1"=dateFunc(start), #"date2"=dateFunc(end)] else 
+get =   if custom = null then  [limit = "100000", #"metrics"=met, #"dimensions"=dim, #"id"=id, #"date1"=dateFunc(start), #"date2"=dateFunc(end)] else 
 params(custom) & [#"id"=id, #"date1"=dateFunc(start), #"date2"=dateFunc(end)] ,
 headers = [#"Authorization"="OAuth "&Extension.CurrentCredential()[access_token]],
 web = Web.Contents(url, [Query = get, Headers = headers, ManualStatusHandling = {404, 400}]),
