@@ -70,13 +70,13 @@ windowHeight = 800;
 
 AppMetrica.Data = (id as text,  start as text,  end as text,    optional custom as text, optional metrics as text, optional dimensions as text)=>
     let
-url = if custom = null then "https://api.appmetrica.yandex.ru/stat/v1/data.csv" else Text.BeforeDelimiter(custom, "?")&".csv",
+url = if custom = null then "/stat/v1/data.csv" else Text.AfterDelimiter(Text.BeforeDelimiter(custom, "?"),".yandex.ru")   &".csv"   ,
 dim = if dimensions=null then "" else dimensions,
 met = if metrics=null then "ym:u:activeUsers" else metrics,
 get =   if custom = null then  [limit = "100000", #"metrics"=met, #"dimensions"=dim, #"id"=id, #"date1"=dateFunc(start), #"date2"=dateFunc(end)] else 
-params(custom) & [#"id"=id, #"date1"=dateFunc(start), #"date2"=dateFunc(end)] ,
+params(custom) & [limit = "100000", #"id"=id, #"date1"=dateFunc(start), #"date2"=dateFunc(end)] ,
 headers = [#"Authorization"="OAuth "&Extension.CurrentCredential()[access_token]],
-web = Web.Contents(url, [Query = get, Headers = headers, ManualStatusHandling = {404, 400}]),
+web = Web.Contents("https://api.appmetrica.yandex.ru", [RelativePath = url, Query = get, Headers = headers, ManualStatusHandling = {404, 400}]),
 result = Csv.Document(web)
 in Table.PromoteHeaders(result,  [PromoteAllScalars=true]);
     
