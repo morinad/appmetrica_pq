@@ -28,6 +28,8 @@
 ### Полезные ссылки:
 Инструкция по использованию: https://youtu.be/Gnw6yTpQlbE
 
+Получение токена: https://oauth.yandex.ru/authorize?response_type=token&client_id=5d5a116c2b194f838d286369ddd15388&redirect_uri=https://oauth.yandex.ru/verification_code
+
 Справка AppMetrica: https://appmetrica.yandex.ru/docs/mobile-api/api_v1/metrics/mainmetr.html
 
 
